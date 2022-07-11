@@ -1,5 +1,5 @@
 import { iAuthenticator } from "./interfaces";
-const UserRepo =  require( "./database/repositories/UserRepo" );
+import UserRepo from "./database/repositories/UserRepo";
 
 class UsernamePasswordAuthenticator implements iAuthenticator {
 
@@ -8,8 +8,8 @@ class UsernamePasswordAuthenticator implements iAuthenticator {
     async authenticate( identifier: string, secret: string ): Promise<Boolean> {
         
         this.userData = await UserRepo.getUserByEmail( identifier );
-
-        return Promise.resolve( this.userData && ( identifier === this.userData.userName ) && ( secret === this.userData.password ) );
+        
+        return Promise.resolve( this.userData && ( identifier === this.userData.email ) && ( secret === this.userData.password ) );
     };
 };
 

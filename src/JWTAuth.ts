@@ -7,10 +7,10 @@ class JWTAuth {
     sign( payloadObj ) {
 
         try {
-            const token = jwt.sign( payloadObj, config.jwtSecret, config.jwtExpiry );
+            const token = jwt.sign( payloadObj, config.jwtSecret, { expiresIn: config.jwtExpiry } );
 
             return {
-                success: false,
+                success: true,
                 token
             };
 

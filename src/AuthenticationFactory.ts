@@ -25,7 +25,10 @@ class AuthenticationFactory {
         const authenticator = this.getAuthenticator( authenticationType );
 
         if ( await authenticator.authenticate( identifier, secret ) ) {
-            return tokenService.sign( authenticator.userData );
+            return tokenService.sign( {
+                userName: `${ authenticator.userData.firstName } ${ authenticator.userData.lastName }`,
+                email: authenticator.userData.email
+            } );
         }
     };
 
